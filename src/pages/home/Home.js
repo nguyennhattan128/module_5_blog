@@ -4,7 +4,9 @@ import Sidenav from "../../components/Sidenav";
 import RightSidebar from "../../components/RightSidebar";
 
 
+
 export function Home() {
+
     return (
         <>
             <NavBar/>
