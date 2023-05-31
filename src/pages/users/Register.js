@@ -36,7 +36,7 @@ export function Register() {
                 const user = {username: username, password: password1}
                 try {
                     console.log('vao axios')
-                    const res = await axios.post(`http://localhost:8181/users/signup`, user)
+                    const res = await axios.post(`http://localhost:3001/users/register`, user)
                     setSuccess(true)
                 } catch (e) {
                     console.log('check axios error: ', axios.isAxiosError(e))

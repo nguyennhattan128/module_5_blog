@@ -13,12 +13,6 @@ const useSlice = createSlice({
             state.currentUser = action.payload;
             localStorage.setItem('user' , JSON.stringify(action.payload))
         })
-            .addCase(login.pending,(state, action)=>{
-
-            })
-            .addCase(login.rejected,(state, action)=>{
-
-            })
     }
 })
 

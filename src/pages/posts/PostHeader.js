@@ -1,6 +1,21 @@
-
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {getAllPost} from "../../service/postService";
 
 export default function PostHeader(){
+    const dispatch = useDispatch();
+    const posts = useSelector(({posts}) => {
+        return posts;
+    })
+
+    const listPost = posts.list
+    console.log(listPost)
+
+    useEffect(() => {
+        dispatch(getAllPost());
+    }, [])
+
+
     return(
         <>
             <div className="card-header border-0 pb-0">
@@ -26,8 +41,8 @@ export default function PostHeader(){
                         {/* Card feed action dropdown menu */}
                         <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
                             <li><a className="dropdown-item" href="my-blog/src/components#"> <i className="bi bi-person-x fa-fw pe-2" />Make friend </a></li>
-                            <li><a className="dropdown-item" href="my-blog/src/components#"> <i className="bi bi-bookmark fa-fw pe-2" />Update post</a></li>
-                            <li><a className="dropdown-item" href="my-blog/src/components#"> <i className="bi bi-x-circle fa-fw pe-2" />Delete</a></li>
+                            <li><a className="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#feedActionPhoto"> <i className="bi bi-bookmark fa-fw pe-2" />Update post</a></li>
+                            <li><a className="dropdown-item" > <i className="bi bi-x-circle fa-fw pe-2" />Delete</a></li>
 
                         </ul>
                     </div>

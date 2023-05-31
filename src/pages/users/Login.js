@@ -30,13 +30,13 @@ export function Login() {
                 const user = {username: username, password: password}
                 console.log('vao axios')
                 dispatch(login(user)).then((data) => {
-                    if (data.payload == 'khong dung pass') {
+                    if (data.payload == 'Password is wrong') {
                         api.info({
-                            message: 'khong dung pass'
+                            message: 'Password is wrong'
                         })
-                    } else if (data.payload == 'khong dung username') {
+                    } else if (data.payload == 'User is not exist') {
                         api.info({
-                            message: 'khong dung username'
+                            message: 'User is not exist'
                         })
                     } else {
                         navigate('/home');
