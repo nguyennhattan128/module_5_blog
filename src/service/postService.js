@@ -1,11 +1,12 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import CustomAPI from "./CustomAPI";
+import customAPI from "./CustomAPI";
 
 
 export const getAllPost = createAsyncThunk(
+
     'posts/getAllPost',
     async () => {
-        const res = await CustomAPI().get('posts');
+        const res = await customAPI().get('posts');
         console.log(res.data)
         return res.data;
     })

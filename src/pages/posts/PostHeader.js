@@ -3,11 +3,11 @@ import {useEffect} from "react";
 import {getAllPost} from "../../service/postService";
 
 export default function PostHeader(){
+    console.log('1111111')
     const dispatch = useDispatch();
     const posts = useSelector(({posts}) => {
         return posts;
     })
-
     const listPost = posts.list
     console.log(listPost)
 
@@ -18,12 +18,13 @@ export default function PostHeader(){
 
     return(
         <>
+            {}
             <div className="card-header border-0 pb-0">
                 <div className="d-flex align-items-center justify-content-between">
                     <div className="d-flex align-items-center">
                         {/* Avatar */}
                         <div className="avatar avatar-story me-2">
-                            <a href="my-blog/src/components#!"> <img className="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt="" /> </a>
+                            <a href="my-blog/src/components#!"> <img className="avatar-img rounded-circle" src='' alt="" /> </a>
                         </div>
                         {/* Info */}
                         <div>

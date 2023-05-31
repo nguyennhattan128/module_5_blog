@@ -8,3 +8,11 @@ export const login = createAsyncThunk(
         console.log(res.data)
         return res.data;
     })
+
+export const getUser =  createAsyncThunk(
+    'user/login',
+    async (id) => {
+        const res = await axios.get(`http://localhost:3001/users/${id}`);
+        console.log(res.data)
+        return res.data;
+    })
