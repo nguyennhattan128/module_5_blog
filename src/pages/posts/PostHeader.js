@@ -1,6 +1,8 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {getAllPost} from "../../service/postService";
+import userInfoReducer from "../../redux/users/userInforSlice";
+import {getUser} from "../../service/userService";
 
 export default function PostHeader(){
     console.log('1111111')
@@ -8,29 +10,42 @@ export default function PostHeader(){
     const posts = useSelector(({posts}) => {
         return posts;
     })
+    const idCurrentUser = useSelector(({users}) => {
+        return users.currentUser.idUser;
+    })
     const listPost = posts.list
     console.log(listPost)
+    const userInfo = useSelector(({userInfo}) => {
+        return userInfo;
+    })
+    console.log(userInfo)
+
+
 
     useEffect(() => {
+        console.log("mounted")
         dispatch(getAllPost());
-    }, [])
+        if (idCurrentUser) {
+            dispatch(getUser(idCurrentUser));
+        }
+    }, []);
 
 
     return(
         <>
-            {}
+            {listPost ? listPost.map(item=>(
             <div className="card-header border-0 pb-0">
                 <div className="d-flex align-items-center justify-content-between">
                     <div className="d-flex align-items-center">
                         {/* Avatar */}
                         <div className="avatar avatar-story me-2">
-                            <a href="my-blog/src/components#!"> <img className="avatar-img rounded-circle" src='' alt="" /> </a>
+                            <a href="my-blog/src/components#!"> <img className="avatar-img rounded-circle" src={item.author.image} alt="" /> </a>
                         </div>
                         {/* Info */}
                         <div>
                             <div className="nav nav-divider">
                                 <h6 className="nav-item card-title mb-0"> <a href="my-blog/src/components#!"> Lori Ferguson </a></h6>
-                                <span className="nav-item small"> 2hr</span>
+                                <span className="nav-item small">{item.date_created.substring(0, 10)}</span>
                             </div>
                         </div>
                     </div>
@@ -50,6 +65,9 @@ export default function PostHeader(){
                     {/* Card feed action dropdown END */}
                 </div>
             </div>
+                ))
+                : <></>
+            }
         </>
     )
 }

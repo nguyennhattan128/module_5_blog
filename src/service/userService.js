@@ -1,5 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
+import customAPI from "./CustomAPI";
 
 export const login = createAsyncThunk(
     'user/login',
@@ -10,9 +11,8 @@ export const login = createAsyncThunk(
     })
 
 export const getUser =  createAsyncThunk(
-    'user/login',
+    'userInfo/getUser', // cai nay ngu phai nghien cuu lai
     async (id) => {
-        const res = await axios.get(`http://localhost:3001/users/${id}`);
-        console.log(res.data)
+        const res = await customAPI().get( `users/${id}`);
         return res.data;
     })

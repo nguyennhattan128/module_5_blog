@@ -5,7 +5,7 @@ const customAPI = () => {
     return axios.create({
     baseURL: 'http://localhost:3001/',
     headers: {
-        Authorization : `Bearer ${token1.token}`
+        Authorization : `Bearer ${localStorage.getItem('user')?JSON.parse(localStorage.getItem('user')).token:""}`
     }
 });
 }

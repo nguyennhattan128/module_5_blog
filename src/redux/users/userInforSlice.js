@@ -2,18 +2,17 @@ import {createSlice} from "@reduxjs/toolkit";
 import {getUser} from "../../service/userService";
 
 const initialState = {
-    currentUser: []
+    currentUser: {}
 }
-const useSlice = createSlice({
-    name: 'user',
+const userInfoSlice = createSlice({
+    name: 'userInfo',
     initialState,
     extraReducers: builder => {
         builder
             .addCase(getUser.fulfilled, (state, action) => {
                 state.currentUser = action.payload;
-
             })
     }
 })
 
-export default useSlice.reducer;
+export default userInfoSlice.reducer;

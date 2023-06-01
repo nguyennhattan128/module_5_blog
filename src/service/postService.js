@@ -7,6 +7,5 @@ export const getAllPost = createAsyncThunk(
     'posts/getAllPost',
     async () => {
         const res = await customAPI().get('posts');
-        console.log(res.data)
         return res.data;
     })
