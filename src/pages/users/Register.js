@@ -35,16 +35,21 @@ export function Register() {
             if (password1 === password2) {
                 const user = {username: username, password: password1}
                 try {
-                    console.log('vao axios')
                     const res = await axios.post(`http://localhost:3001/users/register`, user)
                     setSuccess(true)
                 } catch (e) {
-                    console.log('check axios error: ', axios.isAxiosError(e))
+                    console.log('check axios error: ',e, axios.isAxiosError(e))
                     if (axios.isAxiosError(e)) {
-                        setError({status: true, message: e.response.data.message});
-                        api.info({
-                            message: e.response.data.message
-                        });
+                        if(e.response.data){
+                            api.info({
+                                message: e.response.data
+                            });
+                        }else{
+                            setError({status: true, message: e.response.data.message})
+                            api.info({
+                                message: e.response.data.message
+                            });
+                        }
                     }
                 }
             } else {

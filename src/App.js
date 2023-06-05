@@ -7,6 +7,7 @@ import 'antd/dist/reset.css';
 import Error from "./components/Error";
 import List from "./pages/posts/List";
 import {useSelector} from "react-redux";
+import Test from "./pages/posts/Test";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Routes>
                 <Route path={Path.REGISTER} element={<Register/>}/>
                 <Route path={Path.LOGIN} element={<Login/>}/>
+                <Route path={"/test"} element={<Test/>}/>
                 {user ?
                     <>
                         <Route path={Path.HOME} element={<Home/>}>

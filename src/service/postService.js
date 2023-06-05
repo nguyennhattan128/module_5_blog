@@ -11,12 +11,23 @@ export const getAllPost = createAsyncThunk(
     })
 
 export const addPost = createAsyncThunk(
-
     'post/addPost',
-    async (id)=>{
+    async (data)=>{
         console.log('da vao addPost')
-        const res = await customAPI().post(`posts`);
+        console.log('day la data trong createAsyncThunk ', data)
+        const res = await customAPI().post(`posts`,data,{ headers: {
+                "Content-Type": "multipart/form-data",
+            }});
         return res.data;
+    }
+)
+
+export const deletePost = createAsyncThunk(
+    'post/deletePost',
+    async (id)=>{
+        console.log('da vao deletePost ')
+        const res = await customAPI().delete(`posts/${id}`);
+        return id;
     }
 )
 
