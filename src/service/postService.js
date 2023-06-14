@@ -30,6 +30,24 @@ export const deletePost = createAsyncThunk(
         return id;
     }
 )
+export const findPostById = createAsyncThunk(
+    'posts/findPostById',
+    async (id) => {
+        console.log('da vao findPostById: ')
+        const res = await customAPI().get(`posts/admin/${id}`);
+        console.log('da vao findPostById: ',res.data)
+        return res.data.data;
+    }
+)
+export const editPost = createAsyncThunk(
+    'post/editPost',
+    async (arg, thunkAPI) => {
+        console.log( 'day la arg',arg)
+        await customAPI().put(`posts/${arg.id}`, arg.post,{ headers: {
+                "Content-Type": "multipart/form-data",
+            }}) //Tham số arg là một object chứa id và thông tin sản phẩm mới
+    }
+)
 
 
 

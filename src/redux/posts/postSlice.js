@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {addPost, deletePost, getAllPost} from "../../service/postService";
+import {addPost, deletePost, findPostById, getAllPost} from "../../service/postService";
 
 
 
@@ -30,6 +30,9 @@ const productSlice = createSlice({
            }
            state.list = list
        })
+        builder.addCase(findPostById.fulfilled,(state,action)=>{
+            state.list =  action.payload
+        })
     }
 });
 export default productSlice.reducer

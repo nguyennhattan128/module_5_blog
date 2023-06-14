@@ -1,11 +1,12 @@
 import {useDispatch, useSelector} from "react-redux";
+import {Link} from 'react-router-dom';
 import {Button} from 'antd';
 import {useEffect, useRef, useState} from "react";
 import {getAllPost} from "../../service/postService";
 import {getUser} from "../../service/userService";
 import {Field, Form, Formik} from 'formik';
 import {useNavigate} from "react-router-dom";
-import {addPost,deletePost} from "../../service/postService";
+import {addPost, deletePost} from "../../service/postService";
 import {
     ref,
     uploadBytes,
@@ -23,7 +24,6 @@ export default function List() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const posts = useSelector(({posts}) => {
-        console.log(posts)
         return posts;
     })
     const idCurrentUser = useSelector(({users}) => {
@@ -36,12 +36,11 @@ export default function List() {
     })
 
     const submit = (Post) => {
-        console.log('form data ow day:',Post.values())
+        console.log('form data ow day:', Post.values())
         dispatch(addPost(Post)).then(() => {
             dispatch(getAllPost())
         });
     }
-
 
 
     const uploadFile = () => {
@@ -114,12 +113,16 @@ export default function List() {
                                             aria-labelledby="cardFeedAction">
                                             <li><a className="dropdown-item" href="my-blog/src/components#"> <i
                                                 className="bi bi-person-x fa-fw pe-2"/>Make friend </a></li>
-                                            <li><a className="dropdown-item" href="" data-bs-toggle="modal"
-                                                   data-bs-target="#feedActionPhoto"> <i
-                                                className="bi bi-bookmark fa-fw pe-2"/>Update post</a></li>
-                                            <li><a className="dropdown-item" onClick={()=>dispatch(deletePost(item.id))}> <i className="bi bi-x-circle fa-fw pe-2"/>Delete</a>
+                                            <li><Link className="dropdown-item"
+                                                                                             // href="" data-bs-toggle="modal"
+                                                                                             // data-bs-target="#feedActionPhoto"
+                                                                                             to={`/home/edit/${item.id}`}>
+                                                <i className="bi bi-bookmark fa-fw pe-2"/>
+                                                Edit</Link>
                                             </li>
-
+                                            <li><a className="dropdown-item" onClick={() => dispatch(deletePost(item.id))}>
+                                                <i className="bi bi-x-circle fa-fw pe-2"/>Delete</a>
+                                            </li>
                                         </ul>
                                     </div>
                                     {/* Card feed action dropdown END */}
@@ -139,11 +142,13 @@ export default function List() {
                                 <ul className="nav nav-stack py-3 small">
                                     <li className="nav-item">
                                         <a className="nav-link active" href="my-blog/src/components#!"> <i
-                                            className="bi bi-hand-thumbs-up-fill pe-1"/>Liked ({item.like && item.like.length})</a>
+                                            className="bi bi-hand-thumbs-up-fill pe-1"/>Liked
+                                            ({item.like && item.like.length})</a>
                                     </li>
                                     <li className="nav-item">
                                         <a className="nav-link" href="my-blog/src/components#!"> <i
-                                            className="bi bi-chat-fill pe-1"/>Comments ({item.comments && item.comments.length})</a>
+                                            className="bi bi-chat-fill pe-1"/>Comments
+                                            ({item.comments && item.comments.length})</a>
                                     </li>
                                     {/* Card share action START */}
                                     <li className="nav-item dropdown ms-sm-auto">
@@ -271,21 +276,23 @@ export default function List() {
                                             }}>
                                                 {/* Select Option */}
                                                 <div className="col-sm-6 col-lg-4">
-                                                    <Field as="select"  className="form-select js-choice" name="status" style={{
-                                                        width: '101px',
-                                                        height: '36px'
-                                                    }}>
+                                                    <Field as="select" className="form-select js-choice" name="status"
+                                                           style={{
+                                                               width: '101px',
+                                                               height: '36px'
+                                                           }}>
                                                         <option value="public">Public</option>
                                                         <option value="private">Private</option>
                                                     </Field>
 
                                                 </div>
                                                 <div className="col-sm-6 col-lg-4">
-                                                    <Field as="select"  className="form-select js-choice" name="category" style={{
-                                                        width: '101px',
-                                                        height: '36px',
-                                                        marginLeft: '-37px'
-                                                    }}>
+                                                    <Field as="select" className="form-select js-choice" name="category"
+                                                           style={{
+                                                               width: '101px',
+                                                               height: '36px',
+                                                               marginLeft: '-37px'
+                                                           }}>
                                                         <option value="PV">Cate</option>
                                                         <option value="1">Chinh tri</option>
                                                         <option value="2">Doi song</option>
@@ -297,8 +304,8 @@ export default function List() {
                                             </div>
 
                                             <Field className="form-control pe-4 fs-3 lh-1 border-0" rows={2}
-                                                      placeholder="Share your thoughts..." defaultValue={""}
-                                                      name="content"/>
+                                                   placeholder="Share your thoughts..." defaultValue={""}
+                                                   name="content"/>
 
                                             <div style={{marginRight: '30px'}}>
                                                 <FileUpload/>

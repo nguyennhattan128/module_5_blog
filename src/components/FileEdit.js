@@ -2,11 +2,13 @@ import {useRef, useState} from "react";
 import {useFormikContext} from "formik";
 
 
-export default function FileUpload() {
+export default function FileUpload(props) {
+    const url = props.image
+    console.log(url)
     const fileInput = useRef(null);
     const {values, submitForm} = useFormikContext();
     console.log('values: ', values)
-    const [imageUrl, setImageUrl] = useState('')
+    const [imageUrl, setImageUrl] = useState(url)
 
     function handleClick() { // không return thì sẽ trả undifile
         fileInput.current.click();

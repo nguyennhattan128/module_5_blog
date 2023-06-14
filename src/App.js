@@ -8,6 +8,7 @@ import Error from "./components/Error";
 import List from "./pages/posts/List";
 import {useSelector} from "react-redux";
 import Test from "./pages/posts/Test";
+import {Edit} from "./pages/home/post/EditPost";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                     <>
                         <Route path={Path.HOME} element={<Home/>}>
                             <Route path='' element={<List/>}/>
+                            <Route path='edit/:id' element={<Edit/>}/>
                             <Route path='error' element={<Error/>}/>
                         </Route>
                     </>
